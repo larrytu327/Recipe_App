@@ -9,4 +9,5 @@ urlpatterns = [
     path('recipes/<int:pk>/', views.RecipeDetail.as_view(), name="recipe_detail"),
     path('recipes/<int:pk>/update', views.RecipeUpdate.as_view(), name="recipe_update"),
     path('recipes/<int:pk>/delete', views.RecipeDelete.as_view(), name="recipe_delete"),
+    path('recipes/<int:pk>/ingredients/new/', views.IngredientCreate.as_view(), name="ingredient_create"),
 ]

@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Recipe
+from .models import Recipe, Ingredients
 from django.urls import reverse
 
 class Home(TemplateView):
@@ -51,3 +51,11 @@ class RecipeDelete(DeleteView):
     model = Recipe
     template_name = "recipe_delete_confirmation.html"
     success_url = "/recipe/"
+
+class IngredientCreate(View):
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        type = request.POST.get("type")
+        recipe = Recipe.objects.get(pk=pk)
+        Ingredients.objects.create(name=name, type=type, recipe=recipe)
+        return redirect('recipe_detail', pk=pk)

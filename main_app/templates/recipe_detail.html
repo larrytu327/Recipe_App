@@ -20,6 +20,32 @@
         </a>
     </div>
     <div class="detail__ingredients mb-5">
+        <form class="mb-5" action="{% url 'ingredient_create' recipe.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="name"
+                        placeholder="Name of ingredient"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="type"
+                        placeholder="Ingredient Type/Category"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Add Ingredient" />
+                </div>
+            </div>
+        </form>
         <h3 class="title is-3">Ingredients</h3>
     
         {% for ingredient in recipe.ingredients.all %}
