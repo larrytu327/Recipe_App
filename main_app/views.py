@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Recipe, Ingredients
+from .models import Recipe, Ingredients, Shopping_Lists
 from django.urls import reverse
 
 class Home(TemplateView):
@@ -59,3 +59,17 @@ class IngredientCreate(View):
         recipe = Recipe.objects.get(pk=pk)
         Ingredients.objects.create(name=name, type=type, recipe=recipe)
         return redirect('recipe_detail', pk=pk)
+    
+class Shopping_Lists(TemplateView):
+    template_name = "shopping_lists_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get('name')
+        if name != None:
+            context["shopping_lists"] = Shopping_Lists.objects.filter(name__icontains=name)
+            context["header"] = f"Searching for shopping list with name: {name}"
+        else:
+            context["shopping_lists"] = Shopping_Lists.objects.all()
+            context["header"] = "Shopping Lists"
+        return context
