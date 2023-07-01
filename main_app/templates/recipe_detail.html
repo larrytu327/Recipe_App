@@ -19,6 +19,22 @@
             </span>
         </a>
     </div>
+    <div class="detail__ingredients mb-5">
+        <h3 class="title is-3">Ingredients</h3>
+    
+        {% for ingredient in recipe.ingredients.all %}
+        <div class="ingredient">
+          <span>{{forloop.counter}}</span>
+          <span><b>{{ingredient.name}}</b></span>
+        </div>
+            {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Ingredients Available</p>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
     <div class="detail__about">
         <h4 class="title is-4">Description</h4>
         <p>{{recipe.description}}</p>

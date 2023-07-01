@@ -11,3 +11,11 @@ class Recipe(models.Model):
         return "Recipe: " + self.name
     class Meta:
         ordering = ['name']
+
+class Ingredients(models.Model):
+    name = models.CharField(max_length=150)
+    type = models.CharField(max_length=150)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients")
+
+    def __str__(self):
+        return self.name
