@@ -1,10 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block title %}Recipes{% endblock %}
+<h1 class="title pt-5">{{header}}</h1>
 
-{% block content %}
-
-<h1 class="title pt-5">Recipes</h1>
+<form class="mb-5" method="get">
+  <div class="field has-addons">
+    <div class="control">
+      <input class="input" type="text" name="name" placeholder="Recipe Name" />
+    </div>
+    <div class="control">
+      <input class="button is-success" type="submit" value="Search" />
+    </div>
+  </div>
+  <a class="button is-dark" href="{% url 'recipe_list' %}">Clear Search</a>
+</form>
 <div class="gallery">
   {% for recipe in recipes %}
   <a href="">
