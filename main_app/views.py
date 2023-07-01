@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from .models import Recipe
 
 class Home(TemplateView):
@@ -23,3 +24,9 @@ class RecipeList(TemplateView):
             context["recipes"] = Recipe.objects.all()
             context["header"] = "Recipes"
         return context
+    
+class RecipeCreate(CreateView):
+    model = Recipe
+    fields = ['name', 'img', 'description', 'instructions', 'link']
+    template_name = "recipe_create.html"
+    success_url = "/recipes/"

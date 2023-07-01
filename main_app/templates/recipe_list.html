@@ -13,6 +13,9 @@
   </div>
   <a class="button is-dark" href="{% url 'recipe_list' %}">Clear Search</a>
 </form>
+<a class="button is-dark" href="{% url 'recipe_create' %}">Add a Recipe</a>
+<br>
+<br>
 <div class="gallery">
   {% for recipe in recipes %}
   <a href="">
