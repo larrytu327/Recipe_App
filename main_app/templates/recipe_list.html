@@ -18,7 +18,7 @@
 <br>
 <div class="gallery">
   {% for recipe in recipes %}
-  <a href="">
+  <a href="{% url 'recipe_detail' recipe.pk %}">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">

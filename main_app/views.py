@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import DetailView
 from .models import Recipe
+from django.urls import reverse
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -29,4 +31,18 @@ class RecipeCreate(CreateView):
     model = Recipe
     fields = ['name', 'img', 'description', 'instructions', 'link']
     template_name = "recipe_create.html"
-    success_url = "/recipes/"
+    
+    def get_success_url(self):
+        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
+
+class RecipeDetail(DetailView):
+    model = Recipe
+    template_name = "recipe_detail.html"
+
+class RecipeUpdate(UpdateView):
+    model = Recipe
+    fields = ['name', 'img', 'descriptions', 'instructions', 'link']
+    template_name = "recipe_update.html"
+    
+    def get_success_url(self):
+        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
