@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from .models import Recipe
 from django.urls import reverse
@@ -46,3 +46,8 @@ class RecipeUpdate(UpdateView):
     
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
+    
+class RecipeDelete(DeleteView):
+    model = Recipe
+    template_name = "recipe_delete_confirmation.html"
+    success_url = "/recipe/"
