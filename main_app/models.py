@@ -26,3 +26,5 @@ class Shopping_Lists(models.Model):
 
     def __str__(self):
         return self.list_name
+    class Meta:
+        ordering = ['list_name']

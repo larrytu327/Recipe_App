@@ -60,16 +60,24 @@ class IngredientCreate(View):
         Ingredients.objects.create(name=name, type=type, recipe=recipe)
         return redirect('recipe_detail', pk=pk)
     
-class Shopping_Lists(TemplateView):
+# class Shopping_Lists(TemplateView):
+#     template_name = "shopping_lists_list.html"
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         name = self.request.GET.get('name')
+#         if name != None:
+#             context["shopping_lists"] = Shopping_Lists.objects.filter(name__icontains=name)
+#             context["header"] = f"Searching for shopping list with name: {name}"
+#         else:
+#             context["shopping_lists"] = Shopping_Lists.objects.all()
+#             context["header"] = "Shopping Lists"
+#         return context
+
+class Shopping_Lists_List(TemplateView):
     template_name = "shopping_lists_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        name = self.request.GET.get('name')
-        if name != None:
-            context["shopping_lists"] = Shopping_Lists.objects.filter(name__icontains=name)
-            context["header"] = f"Searching for shopping list with name: {name}"
-        else:
-            context["shopping_lists"] = Shopping_Lists.objects.all()
-            context["header"] = "Shopping Lists"
+        context["shopping_lists"] = Shopping_Lists.objects.all()
         return context
