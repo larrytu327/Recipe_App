@@ -7,12 +7,13 @@
             <h3 class="title is-3 has-text-success">{{shopping_list.name}}</h3>
             <hr />
 
-            {% for ingredient in playlist.ingredients.all %}
+            {% for ingredient in shopping_list.ingredients.all %}
 
                 <div class="song">
                     <span>{{forloop.counter}}</span>
                     <span><b>{{ingredient.name}}</b></span>
                     <span>{{ingredient.type}}</span>
+
                 </div>
 
             {% endfor %}

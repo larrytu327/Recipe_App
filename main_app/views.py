@@ -39,6 +39,11 @@ class RecipeDetail(DetailView):
     model = Recipe
     template_name = "recipe_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["shopping_lists"] = Shopping_Lists.objects.all()
+        return context
+
 class RecipeUpdate(UpdateView):
     model = Recipe
     fields = ['name', 'img', 'descriptions', 'instructions', 'link']
@@ -80,4 +85,19 @@ class Shopping_Lists_List(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["shopping_lists"] = Shopping_Lists.objects.all()
+        # context["ingredients"] = Ingredients.objects.all()
         return context
+    
+class Shopping_ListsIngredientAssoc(View):
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["shopping_lists"] = Shopping_Lists.objects.all()
+    #     return context
+
+    def get(self, request, pk, ingredient_pk):
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            Shopping_Lists.objects.get(pk=pk).ingredients.remove(ingredient_pk)
+        if assoc == "add":
+            Shopping_Lists.objects.get(pk=pk).ingredients.add(ingredient_pk)
+        return redirect('recipe_detail', pk=pk)
