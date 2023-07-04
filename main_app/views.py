@@ -80,19 +80,15 @@ class IngredientCreate(View):
 #         return context
 
 class Shopping_Lists_List(TemplateView):
+    model = Shopping_Lists
     template_name = "shopping_lists_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["shopping_lists"] = Shopping_Lists.objects.all()
-        # context["ingredients"] = Ingredients.objects.all()
         return context
     
 class Shopping_ListsIngredientAssoc(View):
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["shopping_lists"] = Shopping_Lists.objects.all()
-    #     return context
 
     def get(self, request, pk, ingredient_pk):
         assoc = request.GET.get("assoc")

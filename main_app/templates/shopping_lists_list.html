@@ -13,7 +13,14 @@
                     <span>{{forloop.counter}}</span>
                     <span><b>{{ingredient.name}}</b></span>
                     <span>{{ingredient.type}}</span>
-
+                    <span>
+                      <a href="{% url 'shopping_lists_ingredient_assoc' shopping_list.pk ingredient.pk %}?assoc=remove"
+                    class="button is-danger is-outlined">
+                        <span class="icon is-small">
+                          <i class="fas fa-times"></i>
+                        </span>
+                      </a>
+                    </span>
                 </div>
 
             {% endfor %}
