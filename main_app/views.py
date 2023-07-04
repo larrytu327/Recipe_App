@@ -46,16 +46,16 @@ class RecipeDetail(DetailView):
 
 class RecipeUpdate(UpdateView):
     model = Recipe
-    fields = ['name', 'img', 'descriptions', 'instructions', 'link']
+    fields = ['name', 'img', 'description', 'instructions', 'link']
     template_name = "recipe_update.html"
-    
-    def get_success_url(self):
-        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
+    success_url = "/recipes/"    
+    # def get_success_url(self):
+    #     return reverse('recipe_detail', kwargs={'pk': self.object.pk})
     
 class RecipeDelete(DeleteView):
     model = Recipe
     template_name = "recipe_delete_confirmation.html"
-    success_url = "/recipe/"
+    success_url = "/recipes/"
 
 class IngredientCreate(View):
     def post(self, request, pk):
