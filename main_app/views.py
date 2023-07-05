@@ -94,6 +94,7 @@ class Shopping_ListsIngredientAssoc(View):
         assoc = request.GET.get("assoc")
         if assoc == "remove":
             Shopping_Lists.objects.get(pk=pk).ingredients.remove(ingredient_pk)
+            return redirect('shopping_lists_list')
         if assoc == "add":
             Shopping_Lists.objects.get(pk=pk).ingredients.add(ingredient_pk)
-        return redirect('recipe_detail', pk=pk)
+            return redirect('recipe_detail', pk=pk)
