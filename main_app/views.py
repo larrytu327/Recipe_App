@@ -98,3 +98,13 @@ class Shopping_ListsIngredientAssoc(View):
         if assoc == "add":
             Shopping_Lists.objects.get(pk=pk).ingredients.add(ingredient_pk)
             return redirect('recipe_detail', pk=pk)
+        
+class Shopping_ListDetail(DetailView):
+    model = Shopping_Lists
+    template_name = "shopping_list_detail.html"
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["shopping_lists"] = Shopping_Lists.objects.all()
+    #     return context
+

@@ -4,29 +4,13 @@
     {% for shopping_list in shopping_lists %}
 
         <div class="playlist mb-5">
-            <h3 class="title is-3 has-text-success">{{shopping_list.list_name}}</h3>
+            <h3 class="title is-3 has-text-success">
+              <a href="{% url 'shopping_list_detail' shopping_list.pk %}">{{shopping_list.list_name}}</a>
+            </h3>
             <hr />
-
-            {% for ingredient in shopping_list.ingredients.all %}
-
-                <div class="song">
-                    <span>{{forloop.counter}}</span>
-                    <span><b>{{ingredient.name}}</b></span>
-                    <span>{{ingredient.type}}</span>
-                    <span>
-                      <a href="{% url 'shopping_lists_ingredient_assoc' shopping_list.pk ingredient.pk %}?assoc=remove"
-                    class="button is-danger is-outlined">
-                        <span class="icon is-small">
-                          <i class="fas fa-times"></i>
-                        </span>
-                      </a>
-                    </span>
-                </div>
-
-            {% endfor %}
         </div>
     {% empty %} 
-        <div class="playlist mb-5">"There are no ingredients in this shopping list"</div>
+      <div class="playlist mb-5">"There are no shopping lists"</div>
     {% endfor %}
 </div>
 {% endblock %}
