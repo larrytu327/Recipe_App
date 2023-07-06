@@ -80,7 +80,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'recipe_app_project.wsgi.application'
 
-CORS_ALLOWED_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
