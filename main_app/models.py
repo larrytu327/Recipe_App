@@ -20,7 +20,7 @@ class Ingredients(models.Model):
     def __str__(self):
         return self.name
     
-class Shopping_Lists(models.Model):
+class ShoppingLists(models.Model):
     list_name = models.CharField(max_length=150)
     ingredients = models.ManyToManyField(Ingredients)
 

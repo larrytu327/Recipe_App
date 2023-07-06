@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
-from .models import Recipe, Ingredients, Shopping_Lists
+from .models import Recipe, Ingredients, ShoppingLists
 from django.urls import reverse
 
 class Home(TemplateView):
@@ -41,7 +41,7 @@ class RecipeDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["shopping_lists"] = Shopping_Lists.objects.all()
+        context["shopping_lists"] = ShoppingLists.objects.all()
         return context
 
 class RecipeUpdate(UpdateView):
@@ -80,12 +80,12 @@ class IngredientCreate(View):
 #         return context
 
 class Shopping_Lists_List(TemplateView):
-    model = Shopping_Lists
+    model = ShoppingLists
     template_name = "shopping_lists_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["shopping_lists"] = Shopping_Lists.objects.all()
+        context["shopping_lists"] = ShoppingLists.objects.all()
         return context
     
 class Shopping_ListsIngredientAssoc(View):
@@ -93,14 +93,14 @@ class Shopping_ListsIngredientAssoc(View):
     def get(self, request, pk, ingredient_pk):
         assoc = request.GET.get("assoc")
         if assoc == "remove":
-            Shopping_Lists.objects.get(pk=pk).ingredients.remove(ingredient_pk)
+            ShoppingLists.objects.get(pk=pk).ingredients.remove(ingredient_pk)
             return redirect('shopping_lists_list')
         if assoc == "add":
-            Shopping_Lists.objects.get(pk=pk).ingredients.add(ingredient_pk)
+            ShoppingLists.objects.get(pk=pk).ingredients.add(ingredient_pk)
             return redirect('recipe_detail', pk=pk)
         
 class Shopping_ListDetail(DetailView):
-    model = Shopping_Lists
+    model = ShoppingLists
     template_name = "shopping_list_detail.html"
 
     # def get_context_data(self, **kwargs):
